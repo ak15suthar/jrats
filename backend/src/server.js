@@ -14,7 +14,20 @@ const allowedOrigins = (process.env.FRONTEND_URL || 'http://localhost:3000')
 
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
+    // No origin = same-origin request (postman, server-to-server, same domain)
+    if (!origin) return callback(null, true);
+
+    // Check exact match
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+
+    // Check if origin matches any allowed host (handles www, subdomains)
+    const isAllowed = allowedOrigins.some(allowed => {
+      const allowedHost = new URL(allowed).hostname;
+      const originHost = new URL(origin).hostname;
+      return originHost === allowedHost || originHost.endsWith('.' + allowedHost);
+    });
+
+    if (isAllowed) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
