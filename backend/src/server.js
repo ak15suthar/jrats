@@ -41,10 +41,12 @@ app.use((err, req, res, next) => {
   res.status(500).json({ success: false, error: 'Something went wrong!' });
 });
 
-// Vercel detects this listen() call to route requests
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+// Local development - run directly
+if (require.main === module) {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}
 
 module.exports = app;
