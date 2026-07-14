@@ -8,18 +8,19 @@ import toast from 'react-hot-toast';
 import Link from 'next/link';
 
 export default function AdminOrdersPage() {
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const router = useRouter();
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (authLoading) return;
     if (!user || user.role !== 'admin') {
       router.push('/');
       return;
     }
     loadOrders();
-  }, [user]);
+  }, [user, authLoading]);
 
   const loadOrders = async () => {
     try {

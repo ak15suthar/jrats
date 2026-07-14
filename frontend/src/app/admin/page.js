@@ -9,19 +9,20 @@ import Link from 'next/link';
 import { FiPackage, FiShoppingBag, FiUsers, FiPlus } from 'react-icons/fi';
 
 export default function AdminDashboard() {
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const router = useRouter();
   const [stats, setStats] = useState({ products: 0, orders: 0 });
   const [recentOrders, setRecentOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (authLoading) return;
     if (!user || user.role !== 'admin') {
       router.push('/');
       return;
     }
     loadDashboard();
-  }, [user]);
+  }, [user, authLoading]);
 
   const loadDashboard = async () => {
     try {

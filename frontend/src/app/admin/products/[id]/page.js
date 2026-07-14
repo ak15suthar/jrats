@@ -8,7 +8,7 @@ import toast from 'react-hot-toast';
 import Link from 'next/link';
 
 export default function ProductFormPage() {
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const router = useRouter();
   const params = useParams();
   const isEdit = params.id && params.id !== 'new';
@@ -25,6 +25,7 @@ export default function ProductFormPage() {
   });
 
   useEffect(() => {
+    if (authLoading) return;
     if (!user || user.role !== 'admin') {
       router.push('/');
       return;
@@ -32,7 +33,7 @@ export default function ProductFormPage() {
     if (isEdit) {
       loadProduct();
     }
-  }, [user, isEdit]);
+  }, [user, authLoading, isEdit]);
 
   const loadProduct = async () => {
     setLoading(true);

@@ -10,18 +10,19 @@ import Image from 'next/image';
 import { FiEdit, FiTrash2, FiPlus } from 'react-icons/fi';
 
 export default function AdminProductsPage() {
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const router = useRouter();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (authLoading) return;
     if (!user || user.role !== 'admin') {
       router.push('/');
       return;
     }
     loadProducts();
-  }, [user]);
+  }, [user, authLoading]);
 
   const loadProducts = async () => {
     try {

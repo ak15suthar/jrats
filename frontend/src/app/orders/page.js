@@ -8,18 +8,19 @@ import Link from 'next/link';
 import toast from 'react-hot-toast';
 
 export default function OrdersPage() {
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const router = useRouter();
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (authLoading) return;
     if (!user) {
       router.push('/auth/login');
       return;
     }
     loadOrders();
-  }, [user]);
+  }, [user, authLoading]);
 
   const loadOrders = async () => {
     try {
