@@ -2,11 +2,6 @@
 
 A modern, responsive e-commerce platform built with Next.js frontend, Express.js backend, and PostgreSQL database.
 
-## Live Demo
-
-- **Frontend**: [https://your-vercel-url.vercel.app](https://your-vercel-url.vercel.app)
-- **Backend API**: [https://your-render-url.onrender.com](https://your-render-url.onrender.com)
-
 ## Demo Credentials
 
 | Role | Email | Password |
