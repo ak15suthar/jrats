@@ -2,6 +2,11 @@
 
 A modern, responsive e-commerce platform built with Next.js frontend, Express.js backend, and PostgreSQL database.
 
+## Live Demo
+
+- **Frontend**: https://frontend-ashy-chi-66.vercel.app
+- **Backend API**: https://jrats.onrender.com
+
 ## Demo Credentials
 
 | Role | Email | Password |
@@ -146,7 +151,7 @@ CREATE TABLE order_items (
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/yourusername/shopnow.git
+git clone https://github.com/ak15suthar/jrats.git
 cd shopnow
 ```
 
