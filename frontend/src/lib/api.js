@@ -33,7 +33,8 @@ class ApiClient {
       throw new Error(error.error || 'Request failed');
     }
 
-    return response.json();
+    const result = await response.json();
+    return result.data !== undefined ? result.data : result;
   }
 
   // Auth
